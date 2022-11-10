@@ -1,5 +1,7 @@
 package com.example.lab9_base.Controller;
 
+import com.example.lab9_base.Bean.Arbitro;
+import com.example.lab9_base.Dao.DaoArbitros;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -17,13 +19,31 @@ public class ArbitroServlet extends HttpServlet {
         ArrayList<String> opciones = new ArrayList<>();
         opciones.add("nombre");
         opciones.add("pais");
+        Arbitro arbitro;
+        DaoArbitros arbitrodao = new DaoArbitros();
 
         switch (action) {
 
             case "buscar":
-                /*
-                Inserte su código aquí
-                */
+
+                String searchText = request.getParameter("searchText");
+
+                if(){
+                    ArrayList<Arbitro> arbitroxNombre = arbitrodao.busquedaNombre(searchText);
+                    request.setAttribute("lista", arbitroxNombre);
+                    request.setAttribute("searchText",searchText);
+                } else {
+                    ArrayList<Arbitro> arbitroxPais = arbitrodao.busquedaPais(searchText);
+                    request.setAttribute("lista", arbitroxPais);
+                    request.setAttribute("searchText",searchText);
+                }
+
+
+
+
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("lista.jsp");
+                requestDispatcher.forward(request, response);
+
                 break;
 
             case "guardar":

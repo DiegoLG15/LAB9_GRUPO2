@@ -1,10 +1,14 @@
 package com.example.lab9_base.Dao;
 
-import com.example.lab9_base.Bean.Partido;
+import com.example.lab9_base.Bean.*;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
-public class DaoPartidos {
+public class DaoPartidos extends DaoBase{
     public ArrayList<Partido> listaDePartidos() {
 
         ArrayList<Partido> partidos = new ArrayList<>();
