@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="com.example.lab9_base.Bean.Partido" %>
 <jsp:useBean type="java.util.ArrayList<com.example.lab9_base.Bean.Partido>" scope="request" id="listaPartidos"/>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -9,8 +10,8 @@
         <title>LAB 9</title>
     </head>
     <body>
-    <jsp:include page="/includes/navbar.jsp">
-    </jsp:include>
+    <jsp:include page="/includes/navbar.jsp"/>
+
         <div class='container'>
             <div class="row mb-5 mt-4">
                 <div class="col-lg-6">
