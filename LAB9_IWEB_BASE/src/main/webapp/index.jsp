@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="com.example.lab9_base.Bean.Partido" %>
+<jsp:useBean type="java.util.ArrayList<com.example.lab9_base.Bean.Partido>" scope="request" id="listaPartidos"/>
 <!DOCTYPE html>
 <html>
     <head>
@@ -7,6 +9,8 @@
         <title>LAB 9</title>
     </head>
     <body>
+    <jsp:include page="/includes/navbar.jsp">
+    </jsp:include>
         <div class='container'>
             <div class="row mb-5 mt-4">
                 <div class="col-lg-6">
@@ -27,15 +31,27 @@
                     <th>Árbitro</th>
                 </tr>
 
+                <%
+                    for (Partido partido : listaPartidos) { %>
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td><%=partido.getIdPartido()%>
+                    </td>
+                    <td><%=partido.getNumeroJornada()%>
+                    </td>
+                    <td><%=partido.getFecha()%>
+                    </td>
+                    <td><%=partido.getSeleccionLocal().getNombre()%>
+                    </td>
+                    <td><%=partido.getSeleccionVisitante().getNombre()%>
+                    </td>
+                    <td><%=partido.getSeleccionLocal().getEstadio().getNombre()%>
+                    </td>
+                    <td><%=partido.getArbitro().getNombre()%>
+                    </td>
                 </tr>
+                <%
+                    }
+                %>
 
             </table>
         </div>
