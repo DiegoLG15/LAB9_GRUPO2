@@ -3,7 +3,7 @@ package com.example.lab9_base.Controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-
+import com.example.lab9_base.Dao.*;
 import java.io.IOException;
 
 @WebServlet(name = "PartidoServlet", urlPatterns = {"/PartidoServlet", ""})
@@ -28,14 +28,16 @@ public class PartidoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String action = request.getParameter("action") == null ? "lista" : request.getParameter("action");
+        DaoPartidos daoPartidos = new DaoPartidos();
         RequestDispatcher view;
         switch (action) {
             case "lista":
-                /*
-                Inserte su código aquí
-                 */
+                
+                request.setAttribute("listaPartidos", daoPartidos.listaDePartidos());
+
                 view = request.getRequestDispatcher("index.jsp");
                 view.forward(request, response);
+                break;
                 break;
             case "crear":
                 /*
