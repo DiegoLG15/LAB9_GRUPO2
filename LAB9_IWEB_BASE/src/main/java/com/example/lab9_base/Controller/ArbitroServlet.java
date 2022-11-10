@@ -26,28 +26,25 @@ public class ArbitroServlet extends HttpServlet {
 
             case "buscar":
 
-                String searchText = request.getParameter("searchText");
+                String opcion =request.getParameter("tipo");
+                String buscar = request.getParameter("buscar");
+
                 request.setAttribute("opciones", opciones);
 
-                for(String opcion:opciones){
-                    if(opcion.equals("nombre")){
-                        ArrayList<Arbitro> arbitroxNombre = arbitrodao.busquedaNombre(searchText);
-                        request.setAttribute("lista", arbitroxNombre);
-                        request.setAttribute("searchText",searchText);
-                    } else {
-                        ArrayList<Arbitro> arbitroxPais = arbitrodao.busquedaPais(searchText);
-                        request.setAttribute("lista", arbitroxPais);
-                        request.setAttribute("searchText",searchText);
-                    }
+                if(opcion.equals("nombre")){
+                    ArrayList<Arbitro> arbitroxNombre = arbitrodao.busquedaNombre(buscar);
+                    request.setAttribute("listaArbitros", arbitroxNombre);
+                    request.setAttribute("buscar",buscar);
+                } else if(opcion.equals("pais")){
+                    ArrayList<Arbitro> arbitroxPais = arbitrodao.busquedaPais(buscar);
+                    request.setAttribute("listaArbitros", arbitroxPais);
+                    request.setAttribute("buscar",buscar);
                 }
 
+
                 /**/
-
-
-
-
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("list.jsp");
-                requestDispatcher.forward(request, response);
+                view = request.getRequestDispatcher("/arbitros/list.jsp");
+                view.forward(request, response);
 
                 break;
 
@@ -91,6 +88,7 @@ public class ArbitroServlet extends HttpServlet {
 
         switch (action) {
             case "lista":
+                request.setAttribute("opciones", opciones);
                 request.setAttribute("listaArbitros", arbitrodao.listarArbitros());
                 view = request.getRequestDispatcher("/arbitros/list.jsp");
                 view.forward(request, response);

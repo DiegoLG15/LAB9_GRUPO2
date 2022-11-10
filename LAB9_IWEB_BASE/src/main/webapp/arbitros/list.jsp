@@ -7,6 +7,7 @@
 <jsp:useBean type="java.util.ArrayList<com.example.lab9_base.Bean.Arbitro>" scope="request" id="listaArbitros"/>
 <%
     ArrayList<String> listaOpciones = (ArrayList<String>) request.getAttribute("opciones");
+    String palabraBuscar = (String)request.getAttribute("buscar");
 %>
 <html>
     <head>
@@ -15,6 +16,7 @@
         <title>LAB 9</title>
     </head>
     <body>
+        <jsp:include page="/includes/navbar.jsp"/>
         <div class='container'>
             <div class="row mb-5 mt-4">
                 <div class="col-lg-6">
@@ -33,7 +35,7 @@
                         </select>
                     </div>
                     <div class="col-lg-5">
-                        <input type="text" class="form-control" name="buscar">
+                        <input type="text" class="form-control" name="buscar"  placeholder="<%=palabraBuscar!=null?palabraBuscar:""%>">
                     </div>
                     <div class="col-lg-2">
                         <button type="submit" class="btn btn-primary">Buscar</button>
@@ -58,7 +60,7 @@
                     <td><%=arbitro.getNombre()%></td>
                     <td><%=arbitro.getPais()%></td>
                     <td>
-                        <a href="<%=request.getContextPath()%>/ArbitroServlet?action=borrar&id=">
+                        <a href="<%=request.getContextPath()%>/ArbitroServlet?action=borrar&id=<%=arbitro.getIdArbitro()%>">
                             Borrar
                         </a>
                     </td>

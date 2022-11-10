@@ -54,7 +54,7 @@ public class DaoArbitros extends DaoBase{
         ArrayList<Arbitro> arbitros = new ArrayList<>();
 
         try (Connection conn = getConnection();
-             PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM lab9.arbitro WHERE pais=\"?\";")) {
+             PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM lab9.arbitro WHERE pais=?;")) {
 
             pstmt.setString(1, pais);
 
@@ -84,9 +84,11 @@ public class DaoArbitros extends DaoBase{
 
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM lab9.arbitro a WHERE\n" +
-                     "a.nombre LIKE \"%=?%\" escape \"=\";")) {
+                     "a.nombre LIKE ? escape ?;")) {
 
-            pstmt.setString(1, nombre);
+
+            pstmt.setString(1, "%="+nombre+"%");
+            pstmt.setString(2, "=");
 
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
