@@ -6,6 +6,7 @@
 <%
     ArrayList<String> listaPaises = (ArrayList<String>) request.getAttribute("paises");
 %>
+<%String error5 = (String) request.getAttribute("error5");%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -22,7 +23,12 @@
                     <form method="POST" action="<%=request.getContextPath()%>/ArbitroServlet?action=guardar">
                         <div class="form-group">
                             <label>Nombre</label>
-                            <input type="text" class="form-control" name="nombre">
+                            <input type="text" class="form-control <%=error5!=null?"is-invalid":""%>" name="nombre"  required>
+                            <%if(error5!=null){%>
+                            <div id="validationServer" class="invalid-tooltip">
+                                <%=error5%>
+                            </div>
+                            <%}%>
                         </div>
                         <div class="form-group">
                             <label>País</label>

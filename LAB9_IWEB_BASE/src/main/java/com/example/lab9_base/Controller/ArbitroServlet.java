@@ -1,6 +1,7 @@
 package com.example.lab9_base.Controller;
 
 import com.example.lab9_base.Bean.Arbitro;
+import com.example.lab9_base.Bean.Partido;
 import com.example.lab9_base.Dao.DaoArbitros;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -19,10 +20,17 @@ public class ArbitroServlet extends HttpServlet {
         ArrayList<String> opciones = new ArrayList<>();
         opciones.add("nombre");
         opciones.add("pais");
+        ArrayList<String> paises = new ArrayList<>();
+        paises.add("Peru");
+        paises.add("Chile");
+        paises.add("Argentina");
+        paises.add("Paraguay");
+        paises.add("Uruguay");
+        paises.add("Colombia");
         Arbitro arbitro=new Arbitro();
         DaoArbitros arbitrodao = new DaoArbitros();
 
-        switch (action) {
+        bandera:switch (action) {
 
             case "buscar":
 
@@ -53,6 +61,18 @@ public class ArbitroServlet extends HttpServlet {
                 String nombre = request.getParameter("nombre");
                 String pais = request.getParameter("pais");
 
+
+                ArrayList<Arbitro> listaArbitros = arbitrodao.listarArbitros();
+                for (Arbitro arbitro2: listaArbitros) {
+                    if (nombre.equals(arbitro2.getNombre())) {
+                        request.setAttribute("paises", paises);
+                        String error5 = "Ningun nombre se puede repetir";
+                        request.setAttribute("error5", error5);
+                        view = request.getRequestDispatcher("arbitros/form.jsp");
+                        view.forward(request, response);
+                        break bandera;
+                    }
+                }
                 arbitro.setNombre(nombre);
                 arbitro.setPais(pais);
 
