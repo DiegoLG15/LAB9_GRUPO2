@@ -28,20 +28,19 @@ public class PartidoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String action = request.getParameter("action") == null ? "lista" : request.getParameter("action");
-        DaoPartidos daoPartidos = new DaoPartidos();
         RequestDispatcher view;
+        DaoPartidos daoPartidos = new DaoPartidos();
         switch (action) {
             case "lista":
-                
                 request.setAttribute("listaPartidos", daoPartidos.listaDePartidos());
-
                 view = request.getRequestDispatcher("index.jsp");
                 view.forward(request, response);
                 break;
             case "crear":
-                /*
-                Inserte su código aquí
-                 */
+
+                view = request.getRequestDispatcher("partidos/form.jsp");
+                view.forward(request, response);
+
                 break;
 
         }
