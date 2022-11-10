@@ -32,7 +32,7 @@ public class DaoArbitros extends DaoBase{
 
     public void crearArbitro(Arbitro arbitro) {
 
-        String sql = "INSERT INTO arbitro (nombre, pais) "
+        String sql = "INSERT INTO lab9.arbitro (nombre, pais) "
                 + "VALUES (?, ?)";
 
         try (Connection conn = getConnection();

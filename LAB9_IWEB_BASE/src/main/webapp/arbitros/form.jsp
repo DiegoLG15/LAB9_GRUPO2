@@ -1,4 +1,11 @@
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.example.lab9_base.Bean.Arbitro" %>
+<%@ page import="com.example.lab9_base.Dao.DaoArbitros" %>
+<%@ page import="com.example.lab9_base.Dao.DaoBase" %>
+<%
+    ArrayList<String> listaPaises = (ArrayList<String>) request.getAttribute("paises");
+%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -19,7 +26,9 @@
                         <div class="form-group">
                             <label>País</label>
                             <select name="pais" class="form-control">
-                                <%--  COLOCAR LISTA DE PAÍSES BRINDADA EN EL SERVLET--%>
+                                <%for(String pais:listaPaises){%>
+                                <option value="<%=pais%>"><%=pais%></option>
+                                <% } %>
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Guardar</button>

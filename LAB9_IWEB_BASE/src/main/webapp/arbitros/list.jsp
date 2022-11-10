@@ -1,4 +1,13 @@
+<%@ page import="com.example.lab9_base.Bean.Arbitro" %>
+<%@ page import="com.example.lab9_base.Dao.DaoArbitros" %>
+<%@ page import="com.example.lab9_base.Dao.DaoBase" %>
+<%@ page import="com.example.lab9_base.Controller.ArbitroServlet" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean type="java.util.ArrayList<com.example.lab9_base.Bean.Arbitro>" scope="request" id="listaArbitros"/>
+<%
+    ArrayList<String> listaOpciones = (ArrayList<String>) request.getAttribute("opciones");
+%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -18,7 +27,9 @@
                 <form method="post" action="<%= request.getContextPath()%>/ArbitroServlet?action=buscar" class="row">
                     <div class="col-lg-3">
                         <select name="tipo" class="form-control">
-                            <%--                    ACA DEBE COLOCAR LA LISTA DE OPCIONES MOSTRADAS EN EL SERVLET--%>
+                            <%for(String tipo:listaOpciones){%>
+                            <option value="<%=tipo%>"><%=tipo%></option>
+                            <% } %>
                         </select>
                     </div>
                     <div class="col-lg-5">
@@ -40,16 +51,21 @@
                     <th>Pais</th>
                     <th></th>
                 </tr>
+                <%
+                    for (Arbitro arbitro : listaArbitros) { %>
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td><%=arbitro.getIdArbitro()%></td>
+                    <td><%=arbitro.getNombre()%></td>
+                    <td><%=arbitro.getPais()%></td>
                     <td>
                         <a href="<%=request.getContextPath()%>/ArbitroServlet?action=borrar&id=">
                             Borrar
                         </a>
                     </td>
                 </tr>
+                <%
+                    }
+                %>
             </table>
         </div>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
